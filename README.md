@@ -54,16 +54,6 @@ The scalar input $x(k)$ is mapped into a nonlinearly expanded feature vector $\b
 
 $$\boldsymbol{\phi}(k) = \left[ x(k), x^2(k), x^3(k), \sin(\pi x(k)), \cos(\pi x(k)), \sin(2\pi x(k)), \cos(2\pi x(k)), \dots \right]^T$$
 
-### 3. Adaptive Update Equations
-
-The overall instantaneous system error $e(k) = d(k) - y(k)$ drives all concurrent weight updates:
-
-| Parameter | Update Equation | Description / Step Size |
-| --- | --- | --- |
-| **Linear Weights ($\mathbf{w}_L$)** | $\mathbf{w}_L(k+1) = \mathbf{w}_L(k) + \frac{\mu_L}{\Vert{}\mathbf{x}(k)\Vert{}^2 + \epsilon} e(k) \mathbf{x}(k)$ | Normalized LMS (NLMS) update rule. |
-| **Nonlinear Weights ($\mathbf{w}_{NL}$)** | $\mathbf{w}_{NL}(k+1) = \mathbf{w}_{NL}(k) + \mu_{NL} e(k) \boldsymbol{\phi}(k)$ | Functional Link LMS update rule. |
-| **Mixing Parameter ($\lambda$)** | $\lambda(k+1) = \text{sat}\Big( \lambda(k) + \mu_\lambda e(k) \big(y_L(k) - y_{NL}(k)\big) \Big)$ | Gradient descent on $\frac{1}{2} e^2(k)$, saturated to $[0, 1]$. |
-
 ---
 
 ## Implemented Hybrid Architectures
